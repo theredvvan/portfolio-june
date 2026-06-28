@@ -19,6 +19,8 @@ export interface Service {
   label: string;
   description: string;
   image: string;
+  /** descriptive alt text for the service image (accessibility + SEO) */
+  alt: string;
 }
 
 export interface Stat {

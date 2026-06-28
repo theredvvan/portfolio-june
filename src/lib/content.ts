@@ -24,7 +24,7 @@ export const MENU_LINKS: NavLink[] = [
 ];
 
 export const MENU_META: NavLink[] = [
-  { label: "hellonoreel.com", href: "mailto:hellonoreel@example.com" },
+  { label: "oredwan.com", href: "mailto:hello@oredwan.com" },
   { label: "Privacy policy", href: "#" },
   { label: "Terms & conditions", href: "#" },
 ];
@@ -68,34 +68,38 @@ export const SERVICES: Service[] = [
     label: "Branding",
     description:
       "Strong branding sets you apart in a crowded market and turns first impressions into lasting loyalty.",
-    image: "/images/service-branding.png",
+    image: "/images/branding-services-redwan-outhouna.png",
+    alt: "Brand identity and visual design work",
   },
   {
     id: "development",
-    title: "Development",
+    title: "Funnels",
     number: "(02)",
-    label: "Development",
+    label: "Funnels",
     description:
-      "In software and product contexts, development includes planning, building, testing, and optimizing solutions",
-    image: "/images/service-development.png",
+      "A high-converting funnel turns strangers into clients systematically. Every touchpoint is designed with intent — from the first impression to the final decision.",
+    image: "/images/funnels-services-redwan-outhouna.png",
+    alt: "Sales and marketing funnel design",
   },
   {
     id: "motion",
-    title: "Motion",
+    title: "Content & Social Media",
     number: "(03)",
-    label: "Motion",
+    label: "Content & Social Media",
     description:
-      "Whether used in user form the interfaces, branding advertising or storytelling, motion design enhances user experience",
-    image: "/images/service-motion.png",
+      "Content is your brand speaking before you ever do. I craft stories that stop the scroll, build trust over time, and turn followers into an engaged community.",
+    image: "/images/content-social-media-services-redwan-outhouna.png",
+    alt: "Content creation and social media management",
   },
   {
     id: "uiux",
-    title: "UI/UX Design",
+    title: "Automation",
     number: "(04)",
-    label: "UI/UX Design",
+    label: "Automation",
     description:
-      "Together, they ensure that a product is not only visually appealing but also easy to use, helping users smoothly.",
-    image: "/images/service-uiux.png",
+      "The right system works while you sleep. I build automation flows that nurture leads, trigger the right message at the right moment, and scale your marketing without scaling your workload.",
+    image: "/images/automation-services-redwan-outhouna.png",
+    alt: "Marketing and workflow automation",
   },
 ];
 
@@ -187,11 +191,11 @@ export const FOOTER_COLUMNS: NavLink[][] = [
 
 export const CONTACT = {
   phone: "+1 (208) 555-0112",
-  site: "hellonoreel.com",
-  email: "demonoreel@mail.com",
+  site: "oredwan.com",
+  email: "hello@oredwan.com",
   socials: [
-    { label: "LinkedIn", href: "#" },
-    { label: "X.com", href: "#" },
-    { label: "Facebook", href: "#" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/redwanouthouna" },
+    { label: "X.com", href: "https://x.com/redwanouthouna" },
+    { label: "Instagram", href: "https://instagram.com/redwan.outh" },
   ],
 };

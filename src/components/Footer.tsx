@@ -1,12 +1,19 @@
+import Image from "next/image";
 import { FOOTER_COLUMNS } from "@/lib/content";
 
 export function Footer() {
   return (
     <footer className="bg-[#f5f5f5]">
       <div className="mx-auto max-w-[1296px] px-6 py-20">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-          <a href="#" className="text-[clamp(4rem,12vw,11rem)] font-medium leading-none tracking-tight text-[#0a0a0a]">
-            norell<sup className="top-[-0.6em] text-[0.25em]">®</sup>
+        <div className="reveal grid grid-cols-1 gap-12 md:grid-cols-2">
+          <a href="#" aria-label="O.REDWAN — home" className="block">
+            <Image
+              src="/images/o-redwan-logo.svg"
+              alt="O.REDWAN"
+              width={511}
+              height={77}
+              className="h-auto w-full max-w-[560px]"
+            />
           </a>
 
           <div className="grid grid-cols-3 gap-6 md:justify-items-end md:self-end">
@@ -31,7 +38,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="bg-[#0a0a0a] text-white">
         <div className="mx-auto flex max-w-[1296px] flex-col items-center justify-between gap-4 px-6 py-6 text-sm sm:flex-row">
-          <span>© 2025 norell, Inc. All rights reserved.</span>
+          <span>© 2026 O.REDWAN. All rights reserved.</span>
           <div className="flex gap-8">
             <a href="#" className="hover:opacity-70">Terms &amp; conditions</a>
             <a href="#" className="hover:opacity-70">Privacy policy</a>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { BlurRevealImage } from "@/components/BlurRevealImage";
 import { STATS } from "@/lib/content";
 import { PlusCircle } from "@/components/icons";
 import type { Stat } from "@/types";
@@ -45,32 +45,36 @@ function CountUp({ stat }: { stat: Stat }) {
 
 export function AboutSection() {
   return (
-    <section id="about" className="bg-[#f5f5f5] py-24 md:py-32">
-      <div className="mx-auto max-w-[1296px] px-6">
-        <div className="reveal flex items-center gap-3 text-base font-medium text-[var(--muted-foreground)]">
-          <PlusCircle className="h-5 w-5 text-[#0a0a0a]" />
-          <span>About us</span>
-        </div>
-
-        <h2 className="reveal mt-8 max-w-[680px] text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-[1.15] tracking-[-0.02em]">
-          A creative agency is a company that provides specialized services to
-          help businesses build and promote.
-        </h2>
-
-        <div className="mt-20 grid grid-cols-1 items-end gap-10 md:grid-cols-2">
-          <div className="reveal relative aspect-[592/520] w-full overflow-hidden rounded-2xl">
-            <Image
+    <section id="about" className="bg-[#f5f5f5]">
+      <div className="mx-auto max-w-[1296px] px-10 py-20">
+        {/* Image (left) + label & heading (right), top-aligned */}
+        <div className="reveal flex flex-col items-start gap-10 md:flex-row">
+          <div className="relative aspect-[592/520] w-full overflow-hidden rounded-2xl md:w-[45%]">
+            <BlurRevealImage
               src="/images/about-portrait.png"
-              alt="About Norell"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
+              alt="About O.REDWAN"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
-          <p className="reveal max-w-[420px] text-[clamp(1.25rem,2vw,1.75rem)] font-medium leading-snug text-[#0a0a0a] md:pb-6">
-            We turn ideas into visuals that speak with purpose. We&apos;re here to
-            bring your vision to life.
-          </p>
+          <div className="self-start md:w-[55%]">
+            {/* Label row */}
+            <div className="flex items-center gap-3 text-[14px] font-medium text-[#0a0a0a]">
+              <PlusCircle className="h-5 w-5 text-[#0a0a0a]" />
+              <span>About us</span>
+            </div>
+
+            {/* Heading */}
+            <h2 className="mt-6 max-w-[380px] text-[clamp(20px,2.5vw,28px)] font-medium leading-[1.4] text-[#0a0a0a]">
+              A creative agency is a company that provides specialized services
+              to help businesses build and promote.
+            </h2>
+
+            {/* Secondary body text — directly under the heading */}
+            <p className="mt-10 max-w-[280px] text-[15px] leading-[1.6] text-[#555]">
+              We turn ideas into visuals that speak with purpose. We&apos;re here
+              to bring your vision to life.
+            </p>
+          </div>
         </div>
 
         <div className="mt-24 grid grid-cols-2 gap-y-12 border-t border-[var(--border)] pt-16 md:grid-cols-4">

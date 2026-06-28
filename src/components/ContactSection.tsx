@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BlurRevealImage } from "@/components/BlurRevealImage";
 import { CONTACT } from "@/lib/content";
 import { ArrowUpRight } from "@/components/icons";
 
@@ -7,19 +7,17 @@ export function ContactSection() {
     <section id="contact" className="relative overflow-hidden bg-[#0a0a0a] py-24 md:py-32">
       {/* Portrait backdrop on the right */}
       <div className="absolute inset-y-0 right-0 hidden w-1/2 md:block">
-        <Image
+        <BlurRevealImage
           src="/images/contact-portrait.png"
           alt=""
-          fill
-          sizes="50vw"
-          className="object-cover object-top opacity-90"
+          className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-transparent to-transparent" />
       </div>
 
       <div className="relative mx-auto grid max-w-[1296px] grid-cols-1 items-center gap-12 px-6 md:grid-cols-2">
         {/* Form card */}
-        <div className="rounded-3xl bg-white p-8 md:p-10">
+        <div className="reveal rounded-3xl bg-white p-8 md:p-10">
           <h2 className="text-[clamp(1.75rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] text-[#0a0a0a]">
             Have a project in mind?
           </h2>
@@ -47,7 +45,7 @@ export function ContactSection() {
         </div>
 
         {/* Info */}
-        <div className="text-white">
+        <div className="reveal text-white">
           <h3 className="text-[clamp(3rem,7vw,6rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
             Get In Touch
           </h3>
@@ -68,6 +66,8 @@ export function ContactSection() {
               <a
                 key={s.label}
                 href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center justify-between border-t border-white/20 pt-3 text-base text-white"
               >
                 {s.label}

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BlurRevealImage } from "@/components/BlurRevealImage";
 import { BLOG_POSTS } from "@/lib/content";
 import { PlusCircle } from "@/components/icons";
 
@@ -19,12 +19,10 @@ export function BlogSection() {
             >
               <a href="#" className="group block">
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
-                  <Image
+                  <BlurRevealImage
                     src={post.image}
                     alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
                 <div className="mt-6 border-t border-[var(--border)] pt-6">

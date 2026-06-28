@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { useReveal } from "@/context/RevealContext";
 
 const PANEL_COUNT = 5;
 const CENTER_INDEX = 2;
@@ -17,6 +18,12 @@ const ROWS = [
 
 export function CurtainReveal() {
   const [done, setDone] = useState(false);
+  const { setIsRevealed } = useReveal();
+
+  const handleComplete = () => {
+    setIsRevealed(true);
+    setDone(true);
+  };
 
   return (
     <AnimatePresence>
@@ -41,7 +48,7 @@ export function CurtainReveal() {
                       delay:
                         START_DELAY + Math.abs(index - CENTER_INDEX) * STAGGER,
                     }}
-                    onAnimationComplete={isLast ? () => setDone(true) : undefined}
+                    onAnimationComplete={isLast ? handleComplete : undefined}
                   />
                 );
               })}

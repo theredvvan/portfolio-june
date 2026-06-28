@@ -1,26 +1,61 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import { AnimatePresence, motion } from "motion/react";
 import { MENU_LINKS, MENU_META, NAV_LINKS } from "@/lib/content";
-import { cn } from "@/lib/utils";
-import { CloseIcon, MenuIcon } from "@/components/icons";
+import { useReveal } from "@/context/RevealContext";
+import { scrollToTop } from "@/lib/smooth-scroll";
+
+const OVERLAY_LINKS = MENU_LINKS.filter((link) => link.label !== "404");
 
 export function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hovered, setHovered] = useState<string | null>(null);
+  const { isRevealed } = useReveal();
+
+  // Spotlight: when any overlay item is hovered, others dim to grey.
+  const spotlight = (key: string) => ({
+    color: hovered === null || hovered === key ? "#0a0a0a" : "#aaaaaa",
+    transition: "color 0.2s ease",
+  });
+  const onHover = (key: string) => ({
+    onMouseEnter: () => setHovered(key),
+  });
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [isMenuOpen]);
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 bg-[#f5f5f5]">
+      <motion.header
+        className="fixed inset-x-0 top-0 z-50 bg-[#f5f5f5]"
+        initial={{ y: -100, opacity: 0 }}
+        animate={isRevealed ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+      >
         <div className="mx-auto flex h-[88px] max-w-[1296px] items-center justify-between px-6">
-          <a href="#" className="text-[28px] font-medium tracking-tight text-[#0a0a0a]">
-            norell<sup className="top-[-0.7em] text-[14px]">®</sup>
+          <a
+            href="#"
+            aria-label="O.REDWAN — home"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToTop();
+            }}
+            className="flex items-center"
+          >
+            <Image
+              src="/images/o-redwan-logo.svg"
+              alt="O.REDWAN"
+              width={511}
+              height={77}
+              priority
+              className="h-[22px] w-auto"
+            />
           </a>
 
           <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-16 md:flex">
@@ -28,53 +63,147 @@ export function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-base font-medium text-[#0a0a0a] transition-opacity hover:opacity-60"
+                className="group relative text-base font-medium text-[#0a0a0a]"
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-[#0a0a0a] transition-transform duration-300 ease-in group-hover:scale-x-100" />
               </a>
             ))}
           </nav>
 
-          <button
-            type="button"
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((v) => !v)}
-            className="flex h-[52px] w-[64px] items-center justify-center rounded-2xl bg-[#0a0a0a] text-white transition-transform active:scale-95"
+          <MenuButton
+            isOpen={isMenuOpen}
+            onClick={() => setIsMenuOpen((v) => !v)}
+          />
+        </div>
+      </motion.header>
+
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="fixed inset-0 z-[9998] flex flex-col bg-[#f0f0f0]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            onMouseLeave={() => setHovered(null)}
           >
-            {open ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
-          </button>
-        </div>
-      </header>
+            {/* Top bar */}
+            <div className="mx-auto flex h-[88px] w-full max-w-[1296px] flex-shrink-0 items-center justify-between px-6">
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  scrollToTop();
+                }}
+                aria-label="O.REDWAN — home"
+                className="flex items-center"
+              >
+                <Image
+                  src="/images/o-redwan-logo.svg"
+                  alt="O.REDWAN"
+                  width={511}
+                  height={77}
+                  className="h-[22px] w-auto"
+                />
+              </a>
+              <MenuButton isOpen onClick={() => setIsMenuOpen(false)} />
+            </div>
 
-      {/* Fullscreen menu overlay */}
-      <div
-        className={cn(
-          "fixed inset-0 z-40 flex flex-col justify-between overflow-y-auto bg-[#0a0a0a] px-6 pb-10 pt-28 text-white transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-          open ? "translate-y-0" : "pointer-events-none -translate-y-full",
+            {/* Center links */}
+            <nav className="flex flex-1 flex-col items-center justify-center gap-[10px] text-center">
+              {OVERLAY_LINKS.map((link, index) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  {...onHover(`link-${link.label}`)}
+                  style={spotlight(`link-${link.label}`)}
+                  className="text-[clamp(2.5rem,7vw,4.5rem)] font-extrabold leading-[1.1]"
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{
+                    y: 30,
+                    opacity: 0,
+                    transition: {
+                      duration: 0.25,
+                      ease: [0.16, 1, 0.3, 1],
+                      delay: (OVERLAY_LINKS.length - 1 - index) * 0.05,
+                    },
+                  }}
+                  transition={{
+                    duration: 0.4,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: 0.15 + index * 0.07,
+                  }}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* Bottom footer */}
+            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between px-10 py-6 text-[13px]">
+              <a href={MENU_META[0].href} {...onHover("email")} style={spotlight("email")}>
+                {MENU_META[0].label}
+              </a>
+              <div className="flex items-center gap-6">
+                {MENU_META.slice(1).map((m) => (
+                  <a
+                    key={m.label}
+                    href={m.href}
+                    {...onHover(`meta-${m.label}`)}
+                    style={spotlight(`meta-${m.label}`)}
+                  >
+                    {m.label}
+                  </a>
+                ))}
+              </div>
+              <span {...onHover("copyright")} style={spotlight("copyright")}>
+                © 2026 O.redwan
+              </span>
+            </div>
+          </motion.div>
         )}
-      >
-        <nav className="mx-auto flex w-full max-w-[1296px] flex-col">
-          {MENU_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="w-fit py-2 text-[clamp(2.5rem,7vw,5.5rem)] font-semibold leading-tight tracking-tight transition-colors hover:text-[#f9452d]"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="mx-auto flex w-full max-w-[1296px] flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm text-white/60">
-          {MENU_META.map((m) => (
-            <a key={m.label} href={m.href} className="hover:text-white">
-              {m.label}
-            </a>
-          ))}
-          <span>© 2025 norell, Inc.</span>
-        </div>
-      </div>
+      </AnimatePresence>
     </>
+  );
+}
+
+function MenuButton({
+  isOpen,
+  onClick,
+}: {
+  isOpen: boolean;
+  onClick: () => void;
+}) {
+  const lineTransition = { duration: 0.3, ease: "easeInOut" } as const;
+
+  return (
+    <button
+      type="button"
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      onClick={onClick}
+      className="relative z-[9999] rounded-[12px] bg-[#0a0a0a] px-6 py-[18px] transition-transform active:scale-95"
+    >
+      <div className="flex flex-col items-center justify-center gap-[5px]">
+        <motion.span
+          className="h-[2px] w-[28px] origin-center rounded-[2px] bg-white"
+          animate={isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+          transition={lineTransition}
+        />
+        <motion.span
+          className="h-[2px] w-[28px] origin-center rounded-[2px] bg-white"
+          animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+          transition={lineTransition}
+        />
+        <motion.span
+          className="h-[2px] w-[28px] origin-center rounded-[2px] bg-white"
+          animate={isOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+          transition={lineTransition}
+        />
+      </div>
+    </button>
   );
 }

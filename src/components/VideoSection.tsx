@@ -1,16 +1,14 @@
-import Image from "next/image";
+import { BlurRevealImage } from "@/components/BlurRevealImage";
 import { PlayIcon } from "@/components/icons";
 
 export function VideoSection() {
   return (
     <section className="bg-[#f5f5f5]">
-      <div className="relative h-svh max-h-[720px] min-h-[420px] w-full overflow-hidden">
-        <Image
+      <div className="reveal relative h-svh max-h-[720px] min-h-[420px] w-full overflow-hidden">
+        <BlurRevealImage
           src="/images/video-poster.png"
           alt="Watch the showreel"
-          fill
-          sizes="100vw"
-          className="object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
         />
         <button
           type="button"

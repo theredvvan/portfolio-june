@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CurtainReveal } from "@/components/CurtainReveal";
+import { RevealProvider } from "@/context/RevealContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -10,10 +11,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title:
-    "Norell — Portfolio Website Template for Creative Studios and Agencies",
+  title: "O.REDWAN — Creative Studio Portfolio",
   description:
-    "Creating Visual Narratives that Speak to the Heart of Brands.",
+    "O.REDWAN — Creating visual narratives that speak to the heart of brands.",
+  icons: { icon: "/images/o-redwan-logo.svg" },
+  openGraph: {
+    title: "O.REDWAN — Creative Studio Portfolio",
+    description:
+      "O.REDWAN — Creating visual narratives that speak to the heart of brands.",
+    siteName: "O.REDWAN",
+    images: [{ url: "/images/o-redwan-logo.svg", alt: "O.REDWAN" }],
+  },
 };
 
 export default function RootLayout({
@@ -27,8 +35,10 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-background text-foreground"
         suppressHydrationWarning
       >
-        <CurtainReveal />
-        {children}
+        <RevealProvider>
+          <CurtainReveal />
+          {children}
+        </RevealProvider>
       </body>
     </html>
   );
