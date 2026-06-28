@@ -31,19 +31,24 @@ export interface Stat {
 
 export interface PricingPlan {
   name: string;
-  badgeVariant: "dark" | "accent";
-  pricePerProject: string;
-  priceMonthly: string;
-  unit: string;
-  description: string;
-  ctaVariant: "light" | "dark";
+  price: string;
+  subtitle: string;
   features: string[];
+  recommended?: boolean;
 }
 
-export interface Award {
-  year: string;
+export interface ProcessStep {
+  number: string;
+  title: string;
+  description: string;
+}
+
+export interface Certificate {
+  logo: string;
   title: string;
   org: string;
+  date: string;
+  link: string;
 }
 
 export interface BlogPost {

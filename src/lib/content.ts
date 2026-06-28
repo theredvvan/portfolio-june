@@ -1,8 +1,9 @@
 import type {
-  Award,
   BlogPost,
+  Certificate,
   NavLink,
   PricingPlan,
+  ProcessStep,
   Project,
   Service,
   Stat,
@@ -77,7 +78,7 @@ export const SERVICES: Service[] = [
     number: "(02)",
     label: "Funnels",
     description:
-      "A high-converting funnel turns strangers into clients systematically. Every touchpoint is designed with intent — from the first impression to the final decision.",
+      "A high-converting funnel turns strangers into clients systematically. Every touchpoint is designed with intent, from the first impression to the final decision.",
     image: "/images/funnels-services-redwan-outhouna.png",
     alt: "Sales and marketing funnel design",
   },
@@ -104,70 +105,106 @@ export const SERVICES: Service[] = [
 ];
 
 export const STATS: Stat[] = [
-  { value: 120, suffix: "+", label: "Brands empowered with strategic design" },
-  { value: 75, suffix: "%", label: "Average increase in user engagement" },
-  { value: 8, suffix: "+", label: "Years of industry experience" },
-  { value: 99, suffix: "%", label: "Project delivery satisfaction" },
+  { value: 40, suffix: "+", label: "Brands shaped from the ground up" },
+  { value: 3, suffix: "+", label: "Years building brands and marketing" },
+  { value: 4, suffix: "", label: "Disciplines handled under one roof" },
+  { value: 90, suffix: "%", label: "Clients who return or refer me" },
+];
+
+export const PROCESS_STEPS: ProcessStep[] = [
+  {
+    number: "01",
+    title: "Discovery",
+    description:
+      "We start with a conversation, not a pitch. I ask the right questions to understand your business, your audience, and where the gap is. No assumptions, just listening.",
+  },
+  {
+    number: "02",
+    title: "Strategy",
+    description:
+      "Based on what I learn, I put together a clear direction: what we're building, why, and how it connects to your actual goals. You get a proposal within 48 hours.",
+  },
+  {
+    number: "03",
+    title: "Execution",
+    description:
+      "This is where the work happens. Branding, content, funnels, and automation, all built with intention, delivered on time, and refined until it's right.",
+  },
+  {
+    number: "04",
+    title: "Handoff",
+    description:
+      "We launch together. You get everything you need to move forward independently, or we keep building. Either way, nothing gets left unfinished.",
+  },
 ];
 
 export const PRICING_PLANS: PricingPlan[] = [
   {
-    name: "Basic Plan",
-    badgeVariant: "dark",
-    pricePerProject: "$999",
-    priceMonthly: "$799",
-    unit: "/Per Project",
-    description:
-      "For small business or startups building their first digital presence.",
-    ctaVariant: "light",
+    name: "Brand Starter",
+    price: "$999",
+    subtitle: "For businesses ready to show up properly.",
     features: [
-      "Competitor analysis",
-      "Design a Home page +10 inner page",
-      "Setup basic contact form",
-      "Bug fixing & 24/7 Support",
+      "Brand identity (logo + guidelines)",
+      "Social media kit",
+      "1 week turnaround",
     ],
   },
   {
-    name: "Pro Plan",
-    badgeVariant: "accent",
-    pricePerProject: "$4999",
-    priceMonthly: "$3999",
-    unit: "/month",
-    description:
-      "For established brands looking for a fully tailored esperienced.",
-    ctaVariant: "dark",
+    name: "Growth Pack",
+    price: "$2,499",
+    subtitle: "For businesses ready to grow with intention.",
+    recommended: true,
     features: [
-      "Custom blog design + setup",
-      "Monthly analytics",
-      "E commerce functionality",
-      "Priority support for 6 month",
+      "Everything in Brand Starter",
+      "Content strategy + 30-day calendar",
+      "Funnel design + copywriting",
+      "2 weeks turnaround",
+    ],
+  },
+  {
+    name: "Full System",
+    price: "$4,999",
+    subtitle: "For businesses ready to run on autopilot.",
+    features: [
+      "Everything in Growth Pack",
+      "Marketing automation setup (n8n)",
+      "Monthly performance reporting",
+      "Priority support for 3 months",
     ],
   },
 ];
 
-export const AWARDS: Award[] = [
-  { year: "2016", title: "Best Visual Identity", org: "Creative Excellence Awards" },
-  { year: "2017", title: "Top Brand Agency of the Year", org: "Design Leaders Summit" },
-  { year: "2018", title: "Creative Impact Award", org: "Branding & Identity" },
-  { year: "2019", title: "Visual Mastery Award", org: "UI/UX Design" },
-  { year: "2020", title: "Strategic Design Award", org: "Brand Strategy" },
-  { year: "2021", title: "Top Brand Agency of the Year", org: "Design Leaders Summit" },
+export const CERTIFICATES: Certificate[] = [
+  {
+    logo: "/images/badges/google_logo.webp",
+    title: "Google Project Management Certificate",
+    org: "Google",
+    date: "Nov 2021",
+    link: "https://www.coursera.org/account/accomplishments/verify/A5CIW8F35NUU",
+  },
+  {
+    logo: "/images/badges/hubspot.webp",
+    title: "SEO Certified",
+    org: "HubSpot Academy",
+    date: "Mar 2024",
+    link: "https://app-eu1.hubspot.com/academy/achievements/x9khp4yt/en/1/redwan-outhouna/seo-certified",
+  },
 ];
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    category: "Design",
-    title: "The Art of Minimal Branding Less But Impactful",
+    category: "Branding",
+    title: "Why most brands look forgettable, and how to fix it",
     image: "/images/blog-1.png",
   },
   {
-    category: "Visual Design",
-    title: "The Role of Storytelling in Modern Design",
+    category: "Content",
+    title: "Content that builds trust long before you pitch",
     image: "/images/blog-2.png",
   },
   {
-    category: "Creative Design",
-    title: "Design Trends We're Watching in 2025",
+    category: "Marketing",
+    title: "Funnels and automation, explained without the jargon",
     image: "/images/blog-3.png",
   },
 ];
@@ -190,9 +227,9 @@ export const FOOTER_COLUMNS: NavLink[][] = [
 ];
 
 export const CONTACT = {
-  phone: "+1 (208) 555-0112",
-  site: "oredwan.com",
-  email: "hello@oredwan.com",
+  phone: "+212 7 20 02 94 17",
+  site: "redwanouthouna.com",
+  email: "hello@redwanouthouna.com",
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/redwanouthouna" },
     { label: "X.com", href: "https://x.com/redwanouthouna" },

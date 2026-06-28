@@ -1,25 +1,14 @@
-import { BlurRevealImage } from "@/components/BlurRevealImage";
 import { CONTACT } from "@/lib/content";
 import { ArrowUpRight } from "@/components/icons";
 
 export function ContactSection() {
   return (
     <section id="contact" className="relative overflow-hidden bg-[#0a0a0a] py-24 md:py-32">
-      {/* Portrait backdrop on the right */}
-      <div className="absolute inset-y-0 right-0 hidden w-1/2 md:block">
-        <BlurRevealImage
-          src="/images/contact-portrait.png"
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-transparent to-transparent" />
-      </div>
-
       <div className="relative mx-auto grid max-w-[1296px] grid-cols-1 items-center gap-12 px-6 md:grid-cols-2">
         {/* Form card */}
         <div className="reveal rounded-3xl bg-white p-8 md:p-10">
           <h2 className="text-[clamp(1.75rem,3vw,2.25rem)] font-semibold tracking-[-0.02em] text-[#0a0a0a]">
-            Have a project in mind?
+            Got something you want to build?
           </h2>
 
           <form className="mt-8 flex flex-col gap-5">
@@ -39,7 +28,7 @@ export function ContactSection() {
               type="button"
               className="mt-2 w-full rounded-full bg-[#0a0a0a] py-4 text-base font-medium text-white transition-opacity hover:opacity-90"
             >
-              Submit
+              Send message
             </button>
           </form>
         </div>
@@ -49,14 +38,27 @@ export function ContactSection() {
           <h3 className="text-[clamp(3rem,7vw,6rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
             Get In Touch
           </h3>
-          <div className="mt-10 flex flex-col gap-4 text-[clamp(1.25rem,2vw,1.75rem)] font-medium">
-            <a href={`tel:${CONTACT.phone}`} className="w-fit hover:text-white/70">
+          <div className="mt-10 flex flex-col gap-4 text-[clamp(1rem,1.6vw,1.4rem)] font-medium">
+            <a
+              href={`https://wa.me/${CONTACT.phone.replace(/\D/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-fit underline-offset-4 hover:underline"
+            >
               {CONTACT.phone}
             </a>
-            <a href="#" className="w-fit hover:text-white/70">
+            <a
+              href={`https://${CONTACT.site}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-fit underline-offset-4 hover:underline"
+            >
               {CONTACT.site}
             </a>
-            <a href={`mailto:${CONTACT.email}`} className="w-fit hover:text-white/70">
+            <a
+              href={`mailto:${CONTACT.email}`}
+              className="w-fit underline-offset-4 hover:underline"
+            >
               {CONTACT.email}
             </a>
           </div>

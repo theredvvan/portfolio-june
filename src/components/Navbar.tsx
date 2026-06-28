@@ -6,13 +6,23 @@ import { AnimatePresence, motion } from "motion/react";
 import { MENU_LINKS, MENU_META, NAV_LINKS } from "@/lib/content";
 import { useReveal } from "@/context/RevealContext";
 import { scrollToTop } from "@/lib/smooth-scroll";
+import { cn } from "@/lib/utils";
 
 const OVERLAY_LINKS = MENU_LINKS.filter((link) => link.label !== "404");
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const { isRevealed } = useReveal();
+
+  // Trigger the blur only once the user scrolls down past the top.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Spotlight: when any overlay item is hovered, others dim to grey.
   const spotlight = (key: string) => ({
@@ -33,7 +43,12 @@ export function Navbar() {
   return (
     <>
       <motion.header
-        className="fixed inset-x-0 top-0 z-50 bg-[#f5f5f5]"
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter] duration-700 ease-in-out",
+          scrolled
+            ? "bg-[#f5f5f5]/70 backdrop-blur-md"
+            : "bg-[#f5f5f5] backdrop-blur-0",
+        )}
         initial={{ y: -100, opacity: 0 }}
         animate={isRevealed ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}

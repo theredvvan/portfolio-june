@@ -5,7 +5,6 @@ import { WorkSection } from "@/components/WorkSection";
 import { Testimonial } from "@/components/Testimonial";
 import { ServiceSection } from "@/components/ServiceSection";
 import { AboutSection } from "@/components/AboutSection";
-import { VideoSection } from "@/components/VideoSection";
 import { PricingSection } from "@/components/PricingSection";
 import { AwardSection } from "@/components/AwardSection";
 import { BlogSection } from "@/components/BlogSection";
@@ -25,7 +24,6 @@ export default function Home() {
         <Testimonial />
         <ServiceSection />
         <AboutSection />
-        <VideoSection />
         <PricingSection />
         <AwardSection />
         <BlogSection />
