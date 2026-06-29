@@ -19,3 +19,15 @@ export function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
+
+/** Smoothly scrolls to a hash target (e.g. "#contact"), using Lenis if active. */
+export function scrollToHash(hash: string) {
+  if (!hash || hash === "#") return;
+  const el = document.querySelector(hash);
+  if (!el) return;
+  if (lenis) {
+    lenis.scrollTo(el as HTMLElement, { duration: 1.2, easing: easeInOut });
+  } else {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
+}

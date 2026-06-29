@@ -8,7 +8,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function PricingSection() {
   return (
-    <section className="bg-white py-24 md:py-32">
+    <section id="process" className="bg-white py-24 md:py-32">
       <div className="mx-auto max-w-[1296px] px-6">
         {/* Section label */}
         <div className="reveal flex items-center gap-3 text-base font-medium text-[#0a0a0a]">

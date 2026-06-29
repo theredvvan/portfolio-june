@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { MENU_LINKS, MENU_META, NAV_LINKS } from "@/lib/content";
 import { useReveal } from "@/context/RevealContext";
@@ -10,11 +12,22 @@ import { cn } from "@/lib/utils";
 
 const OVERLAY_LINKS = MENU_LINKS.filter((link) => link.label !== "404");
 
+/**
+ * Resolve in-page hash links (e.g. "#about") to home-relative ones ("/#about")
+ * so the nav works from any route, not just the homepage. Plain "#" goes home.
+ */
+function navHref(href: string) {
+  if (href === "#") return "/";
+  if (href.startsWith("#")) return `/${href}`;
+  return href;
+}
+
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const { isRevealed } = useReveal();
+  const pathname = usePathname();
 
   // Trigger the blur only once the user scrolls down past the top.
   useEffect(() => {
@@ -54,12 +67,14 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
       >
         <div className="mx-auto flex h-[88px] max-w-[1296px] items-center justify-between px-6">
-          <a
-            href="#"
+          <Link
+            href="/"
             aria-label="O.REDWAN — home"
             onClick={(e) => {
-              e.preventDefault();
-              scrollToTop();
+              if (pathname === "/") {
+                e.preventDefault();
+                scrollToTop();
+              }
             }}
             className="flex items-center"
           >
@@ -71,13 +86,13 @@ export function Navbar() {
               priority
               className="h-[22px] w-auto"
             />
-          </a>
+          </Link>
 
           <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-16 md:flex">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
-                href={link.href}
+                href={navHref(link.href)}
                 className="group relative text-base font-medium text-[#0a0a0a]"
               >
                 {link.label}
@@ -105,12 +120,14 @@ export function Navbar() {
           >
             {/* Top bar */}
             <div className="mx-auto flex h-[88px] w-full max-w-[1296px] flex-shrink-0 items-center justify-between px-6">
-              <a
-                href="#"
+              <Link
+                href="/"
                 onClick={(e) => {
-                  e.preventDefault();
                   setIsMenuOpen(false);
-                  scrollToTop();
+                  if (pathname === "/") {
+                    e.preventDefault();
+                    scrollToTop();
+                  }
                 }}
                 aria-label="O.REDWAN — home"
                 className="flex items-center"
@@ -122,7 +139,7 @@ export function Navbar() {
                   height={77}
                   className="h-[22px] w-auto"
                 />
-              </a>
+              </Link>
               <MenuButton isOpen onClick={() => setIsMenuOpen(false)} />
             </div>
 
@@ -131,7 +148,7 @@ export function Navbar() {
               {OVERLAY_LINKS.map((link, index) => (
                 <motion.a
                   key={link.label}
-                  href={link.href}
+                  href={navHref(link.href)}
                   onClick={() => setIsMenuOpen(false)}
                   {...onHover(`link-${link.label}`)}
                   style={spotlight(`link-${link.label}`)}

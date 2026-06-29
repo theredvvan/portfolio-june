@@ -2,7 +2,10 @@ import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative h-svh min-h-[640px] w-full overflow-hidden bg-[#0a0a0a]">
+    <section
+      id="hero"
+      className="relative h-svh min-h-[640px] w-full overflow-hidden bg-[#0a0a0a]"
+    >
       {/* Portrait background */}
       <Image
         src="/images/hero-image-01.png"

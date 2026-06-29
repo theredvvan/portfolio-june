@@ -209,23 +209,6 @@ export const BLOG_POSTS: BlogPost[] = [
   },
 ];
 
-export const FOOTER_COLUMNS: NavLink[][] = [
-  [
-    { label: "Home", href: "#" },
-    { label: "About", href: "#about" },
-    { label: "Contact us", href: "#contact" },
-  ],
-  [
-    { label: "Privacy policy", href: "#" },
-    { label: "Blog", href: "#blog" },
-  ],
-  [
-    { label: "Projects", href: "#work" },
-    { label: "Terms & conditions", href: "#" },
-    { label: "404", href: "#" },
-  ],
-];
-
 export const CONTACT = {
   phone: "+212 7 20 02 94 17",
   site: "redwanouthouna.com",

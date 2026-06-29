@@ -1,5 +1,12 @@
 import Image from "next/image";
-import { FOOTER_COLUMNS } from "@/lib/content";
+
+const FOOTER_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
+  { label: "Projects", href: "/#work" },
+  { label: "Blog", href: "/#blog" },
+];
 
 export function Footer() {
   return (
@@ -16,33 +23,24 @@ export function Footer() {
             />
           </a>
 
-          <div className="grid grid-cols-3 gap-6 md:justify-items-end md:self-end">
-            {FOOTER_COLUMNS.map((column, i) => (
-              <ul key={i} className="flex flex-col gap-4">
-                {column.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-base text-[#0a0a0a] transition-opacity hover:opacity-60"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+          <nav className="flex flex-wrap gap-8 md:justify-end md:self-end">
+            {FOOTER_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-base text-[#0a0a0a] transition-opacity hover:opacity-60"
+              >
+                {link.label}
+              </a>
             ))}
-          </div>
+          </nav>
         </div>
       </div>
 
       {/* Bottom bar */}
       <div className="bg-[#0a0a0a] text-white">
-        <div className="mx-auto flex max-w-[1296px] flex-col items-center justify-between gap-4 px-6 py-6 text-sm sm:flex-row">
-          <span>© 2026 O.REDWAN. All rights reserved.</span>
-          <div className="flex gap-8">
-            <a href="#" className="hover:opacity-70">Terms &amp; conditions</a>
-            <a href="#" className="hover:opacity-70">Privacy policy</a>
-          </div>
+        <div className="mx-auto w-full max-w-[1296px] px-6 py-6 text-center text-sm">
+          © 2026 O.REDWAN. All rights reserved.
         </div>
       </div>
     </footer>
