@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useReveal } from "@/context/RevealContext";
+import { scrollToHash } from "@/lib/smooth-scroll";
 
 const PANEL_COUNT = 5;
 const CENTER_INDEX = 2;
@@ -20,9 +21,26 @@ export function CurtainReveal() {
   const [done, setDone] = useState(false);
   const { setIsRevealed } = useReveal();
 
+  // Start every load at the top and lock scrolling while the curtain plays, so
+  // a hash in the URL can't glitch the reveal. Unlocked again on completion.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   const handleComplete = () => {
     setIsRevealed(true);
     setDone(true);
+    document.body.style.overflow = "";
+
+    // After the reveal, smooth-scroll to the hash section if one was in the URL.
+    const hash = window.location.hash;
+    if (hash && hash !== "#") {
+      setTimeout(() => scrollToHash(hash), 100);
+    }
   };
 
   return (

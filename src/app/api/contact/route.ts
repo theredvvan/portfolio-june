@@ -7,7 +7,17 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  const telegramText = `🔔 *New message from portfolio*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n💬 *Message:* ${message}`;
+  const now = new Date();
+  const formatted = now.toLocaleString("en-GB", {
+    timeZone: "Africa/Casablanca",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const telegramText = `🔔 *New message from portfolio*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n💬 *Message:* ${message}\n\n🕐 *Received:* ${formatted} (Marrakech)`;
 
   try {
     await fetch(

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CurtainReveal } from "@/components/CurtainReveal";
+import ScrollToTop from "@/components/ScrollToTop";
 import { RevealProvider } from "@/context/RevealContext";
 
 const inter = Inter({
@@ -36,6 +37,7 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-background text-foreground"
         suppressHydrationWarning
       >
+        <ScrollToTop />
         <RevealProvider>
           <CurtainReveal />
           {children}

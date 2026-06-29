@@ -13,15 +13,11 @@ export function SmoothScroll() {
 
   useEffect(() => {
     // Stop the browser from restoring the previous scroll position on refresh
-    // so the page always reloads at the top with the reveal animation. Skip the
-    // reset when there's a hash, so /#contact-style links can scroll to it.
-    const hasHash = window.location.hash && window.location.hash !== "#";
+    // so the page always reloads at the top with the reveal animation.
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
-    if (!hasHash) {
-      window.scrollTo(0, 0);
-    }
+    window.scrollTo(0, 0);
 
     const lenis = new Lenis({
       duration: 1.1,
@@ -29,9 +25,7 @@ export function SmoothScroll() {
     });
 
     setLenis(lenis);
-    if (!hasHash) {
-      lenis.scrollTo(0, { immediate: true });
-    }
+    lenis.scrollTo(0, { immediate: true });
 
     let raf = 0;
     function loop(time: number) {
