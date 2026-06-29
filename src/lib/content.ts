@@ -1,5 +1,4 @@
 import type {
-  BlogPost,
   Certificate,
   NavLink,
   PricingPlan,
@@ -25,9 +24,7 @@ export const MENU_LINKS: NavLink[] = [
 ];
 
 export const MENU_META: NavLink[] = [
-  { label: "oredwan.com", href: "mailto:hello@oredwan.com" },
-  { label: "Privacy policy", href: "#" },
-  { label: "Terms & conditions", href: "#" },
+  { label: "redwanouthouna.com / redwan.ma", href: "/" },
 ];
 
 export const PROJECTS: Project[] = [
@@ -188,24 +185,6 @@ export const CERTIFICATES: Certificate[] = [
     org: "HubSpot Academy",
     date: "Mar 2024",
     link: "https://app-eu1.hubspot.com/academy/achievements/x9khp4yt/en/1/redwan-outhouna/seo-certified",
-  },
-];
-
-export const BLOG_POSTS: BlogPost[] = [
-  {
-    category: "Branding",
-    title: "Why most brands look forgettable, and how to fix it",
-    image: "/images/blog-1.png",
-  },
-  {
-    category: "Content",
-    title: "Content that builds trust long before you pitch",
-    image: "/images/blog-2.png",
-  },
-  {
-    category: "Marketing",
-    title: "Funnels and automation, explained without the jargon",
-    image: "/images/blog-3.png",
   },
 ];
 

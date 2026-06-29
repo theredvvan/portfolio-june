@@ -13,7 +13,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://redwanouthouna.com"),
-  title: "O.REDWAN — Creative Studio Portfolio",
+  title: "Redwan Outhouna | Marketing & Design",
   description:
     "O.REDWAN — Creating visual narratives that speak to the heart of brands.",
   icons: { icon: "/images/o-redwan-logo.svg" },

@@ -51,12 +51,6 @@ export interface Certificate {
   link: string;
 }
 
-export interface BlogPost {
-  category: string;
-  title: string;
-  image: string;
-}
-
 export interface FooterColumn {
   links: NavLink[];
 }

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useReveal } from "@/context/RevealContext";
-import { scrollToHash } from "@/lib/smooth-scroll";
 
 const PANEL_COUNT = 5;
 const CENTER_INDEX = 2;
@@ -35,12 +34,6 @@ export function CurtainReveal() {
     setIsRevealed(true);
     setDone(true);
     document.body.style.overflow = "";
-
-    // After the reveal, smooth-scroll to the hash section if one was in the URL.
-    const hash = window.location.hash;
-    if (hash && hash !== "#") {
-      setTimeout(() => scrollToHash(hash), 100);
-    }
   };
 
   return (
