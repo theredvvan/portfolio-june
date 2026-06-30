@@ -87,11 +87,6 @@ export const ARTICLES: Article[] = [
         text: "From logos and colors to packaging and website design, every visual element of a brand is crafted to trigger specific emotions and associations. Luxury brands use sleek, minimalist design to signal exclusivity, while fast-food brands lean on bright colors to project warmth, energy, and happiness. These cues bypass our conscious thinking and speak directly to our desires. Brands even tweak product design purely to look more impressive, notice how large some phone camera modules are. The size often has little to do with performance, and some additions are essentially fake, but they make the product feel more powerful than it really is.",
       },
       {
-        type: "image",
-        src: "/images/branding-services-redwan-outhouna.png",
-        alt: "How visual design and branding shape what we buy",
-      },
-      {
         type: "heading",
         text: "5. Social proof",
       },
