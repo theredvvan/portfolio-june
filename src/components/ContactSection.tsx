@@ -8,6 +8,7 @@ export function ContactSection() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [company, setCompany] = useState(""); // honeypot — must stay empty
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -20,7 +21,7 @@ export function ContactSection() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, company }),
       });
       if (!res.ok) throw new Error("Request failed");
       setSuccess(true);
@@ -46,6 +47,17 @@ export function ContactSection() {
             </p>
           ) : (
             <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-5">
+              {/* Honeypot: hidden from humans; bots that fill it are dropped server-side */}
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                className="absolute left-[-9999px] h-0 w-0 opacity-0"
+              />
               <Field
                 label="Your Name"
                 placeholder="Your name"
