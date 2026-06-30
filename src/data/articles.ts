@@ -42,7 +42,7 @@ export const ARTICLES: Article[] = [
     readTime: 3,
     excerpt:
       "We like to think we're in control of our purchasing decisions, but brands use sophisticated tactics and psychological manipulation to influence us and pull more money out of our wallets.",
-    coverImage: "/images/blog-1.png",
+    coverImage: "/images/brand manipulation.png",
     tags: ["marketing", "branding", "psychology"],
     content: [
       {
@@ -64,6 +64,11 @@ export const ARTICLES: Article[] = [
       {
         type: "paragraph",
         text: "We all have insecurities, and brands are experts at finding and exploiting them. Ads for beauty products prey on anxieties about aging or body image; toothpaste brands tie their products to self-confidence and a bright white smile. Nobody wants to feel awkward or judged. By quietly amplifying these insecurities, brands convince us that their product is the thing standing between us and the version of ourselves we're afraid of.",
+      },
+      {
+        type: "image",
+        src: "/images/colgate_campaign.webp",
+        alt: "Colgate campaign tying the product to confidence and a bright smile",
       },
       {
         type: "heading",
